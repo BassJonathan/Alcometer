@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, ScrollView, Text, TextInput, View, SafeAreaView, VirtualizedList } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import RadioForm from 'react-native-simple-radio-button';
+
+import StyleSheet from './Style';
 
 export default function App() {
 
@@ -69,21 +71,23 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Alcometer</Text>
+    <SafeAreaView>
+    <ScrollView overScrollMode>
+    <View style={StyleSheet.header}>
+        <Text style={StyleSheet.heading}>Alcometer</Text>
       </View>
-      <View style={styles.section}>
-        <Text>Weight</Text>
+      <View style={StyleSheet.section}>
+        <Text style={StyleSheet.sectionHeading}>Weight</Text>
         <TextInput
-          style={styles.input}
+          style={StyleSheet.input}
           onChangeText={setWeight}
           placeholder='in kilograms'
           keyboardType='numeric'
         />
       </View>
-      <View style={styles.section}>
-        <Text>Bottles</Text>
+      <View style={StyleSheet.section}>
+        <Text style={StyleSheet.sectionHeading}>Bottles</Text>
+        <View style={StyleSheet.indexx}>
         <DropDownPicker
           open={bottlesOpen}
           value={bottlesValue}
@@ -92,12 +96,17 @@ export default function App() {
           setValue={setBottlesValue}
           setItems={setBottlesItems}
           onOpen={onOpenBottles}
+          //placeholder='Select number of bottles you drank'
           zIndex={2000}
-          zIndexInverse={1000}
+          listMode='SCROLLVIEW'
+          scrollViewProps={{nestedScrollEnabled: true,}}
+          dropDownContainerStyle={{backgroundColor: "#dfdfdf"}}
+          style={StyleSheet.dropdown}
         />
+        </View>
       </View>
-      <View style={styles.section}>
-        <Text>Time</Text>
+      <View style={StyleSheet.section}>
+        <Text style={StyleSheet.sectionHeading}>Time</Text>
         <DropDownPicker
           open={hoursOpen}
           value={hoursValue}
@@ -106,22 +115,26 @@ export default function App() {
           setValue={setHoursValue}
           setItems={setHoursItems}
           onOpen={onOpenHours}
+          //placeholder='Select the number of hours you have been drinking'
           zIndex={1000}
-          zIndexInverse={2000}
+          listMode='SCROLLVIEW'
+          scrollViewProps={{nestedScrollEnabled: true,}}
+          dropDownContainerStyle={{backgroundColor: "#dfdfdf"}}
+          style={StyleSheet.dropdown}
         />
-      </View>
-      <View>
-        <Text>Gender</Text>
+        </View>
+      <View style={StyleSheet.section}>
+        <Text style={StyleSheet.sectionHeading}>Gender</Text>
         <RadioForm
-          style={styles.radio}
+          style={StyleSheet.radio}
           buttonSize= {10}
           radio_props={genders}
           initial={0}
           onPress={(value) => {setIsMale(value)}}
         />
       </View>
-      <View>
-        <Text>{result.toFixed(2)}</Text>
+      <View style={StyleSheet.resultSection}>
+        <Text style={{ color: result > 3 ? '#ff0000' : '#ffff00' || result < 2 ? '#00ff00' : '#ffff00'}}>{result.toFixed(2)}</Text>
       </View>
       <View>
         <Button
@@ -129,18 +142,7 @@ export default function App() {
           onPress={calculate}
         />
       </View>
-    </View>
+    </ScrollView>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-
-  }
-});
