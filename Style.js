@@ -34,10 +34,30 @@ export default StyleSheet.create({
     resultSection: {
         flex: 1,
         alignItems: "center",
-        paddingVertical: 20,
+        paddingVertical: 5,
     },
     result: {
         fontSize: 40,
         fontWeight: "bold",
+    },
+    button: {
+        backgroundColor: '#0088ff',
+        borderRadius: 5,
+    },
+    loginScreenButton: {
+        marginTop: 10,
+        paddingVertical: 10,
+        backgroundColor: '#08f',
+        borderRadius: 10,
+    },
+    loginText: {
+        color: '#fff',
+        textAlign: 'center',
+        paddingHorizontal: 10,
+        fontSize: 18
+    },
+    footer: {
+        paddingHorizontal: 40,
+        paddingTop: 10,
     },
 });

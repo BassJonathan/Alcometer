@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button, ScrollView, Text, TextInput, View, SafeAreaView, Alert } from 'react-native';
+import { ScrollView, Text, TextInput, View, SafeAreaView, Alert, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import RadioForm from 'react-native-simple-radio-button';
 
@@ -65,7 +65,7 @@ export default function App() {
   }
 
   function calculate() {
-    if (weight == '' || weight == 0) {
+    if (weight == '' || weight <= 0 ) {
       showAlert();
       setResult(0);
     } else {
@@ -108,7 +108,7 @@ export default function App() {
             maxLength={3}
           />
         </View>
-        <View style={[StyleSheet.section, {zIndex: 3000}]}>
+        <View style={[StyleSheet.section, {zIndex: 2000}]}>
           <Text style={StyleSheet.sectionHeading}>Bottles</Text>
           <DropDownPicker
             open={bottlesOpen}
@@ -118,14 +118,13 @@ export default function App() {
             setValue={setBottlesValue}
             setItems={setBottlesItems}
             onOpen={onOpenBottles}
-            //placeholder='Select number of bottles you drank'
             zIndex={2000}
             zIndexInverse={1000}
             listMode='SCROLLVIEW'
             scrollViewProps={{ nestedScrollEnabled: true, }}
           />
         </View>
-        <View style={[StyleSheet.section, {zIndex: 2000}]}>
+        <View style={[StyleSheet.section, {zIndex: 1000}]}>
           <Text style={StyleSheet.sectionHeading}>Time</Text>
           <DropDownPicker
             open={hoursOpen}
@@ -135,7 +134,6 @@ export default function App() {
             setValue={setHoursValue}
             setItems={setHoursItems}
             onOpen={onOpenHours}
-            //placeholder='Select the number of hours you have been drinking'
             zIndex={1000}
             zIndexInverse={2000}
             listMode='SCROLLVIEW'
@@ -155,11 +153,13 @@ export default function App() {
         <View style={StyleSheet.resultSection}>
         <Text style={[{ color: result > 0.4 ? '#f00' : result > 0.3 ? '#ff0' : '#0f0'}, StyleSheet.result]}>{result.toFixed(2)}</Text>
         </View>
-        <View>
-          <Button
-            title='Calculate'
+        <View style={StyleSheet.footer}>
+          <TouchableOpacity
+            style={StyleSheet.loginScreenButton}
             onPress={calculate}
-          />
+            underlayColor='#fff'>
+            <Text style={StyleSheet.loginText}>Calculate</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
