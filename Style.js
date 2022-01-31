@@ -60,4 +60,30 @@ export default StyleSheet.create({
         paddingHorizontal: 40,
         paddingTop: 10,
     },
+    radioButtonContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginRight: 45,
+        marginBottom: 6
+    },
+    radioButton: {
+        height: 20,
+        width: 20,
+        backgroundColor: "#F8F8F8",
+        borderRadius: 10,
+        borderWidth: 3,
+        borderColor: "#08f",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    radioButtonIcon: {
+        height: 10,
+        width: 10,
+        borderRadius: 7,
+        backgroundColor: "#08f"
+    },
+    radioButtonText: {
+        fontSize: 16,
+        marginLeft: 12
+    }
 });

@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { ScrollView, Text, TextInput, View, SafeAreaView, Alert, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import RadioForm from 'react-native-simple-radio-button';
+
+import CustomRadioButtons from "./components/CustomRadioButtons";
 
 import StyleSheet from './Style';
 
@@ -9,6 +10,11 @@ export default function App() {
 
   const [result, setResult] = useState(0)
   const [weight, setWeight] = useState(0)
+
+  const [radioValue, setRadioValue] = useState([
+    { id: 1, value: true, name: "Male", selected: true },
+    { id: 2, value: false, name: "Female", selected: false }
+  ]);
 
   //Bottles-Dropdown:
   const [bottlesOpen, setBottlesOpen] = useState(false);
@@ -69,20 +75,21 @@ export default function App() {
       showAlert();
       setResult(0);
     } else {
-      var litres = bottlesValue * 0.33;
+      /* var litres = bottlesValue * 0.33;
       var grams = litres * 8 * 4.5;
       var burning = weight / 10;
-      var gLeft = grams - burning * hoursValue;
+      var gLeft = grams - burning * hoursValue; */
+      var gLeft2 = (((bottlesValue * 0.33) * 8 * 4.5) - (weight / 10) * hoursValue)
 
       if (isMale) {
-        var result = gLeft / (weight * 0.7)
+        var result = gLeft2 / (weight * 0.7)
         if (result < 0) {
           setResult(0)
         } else {
           setResult(result)
         }
       } else {
-        var result = gLeft / (weight * 0.7)
+        var result = gLeft2 / (weight * 0.6)
         if (result < 0) {
           setResult(0)
         } else {
@@ -142,13 +149,13 @@ export default function App() {
         </View>
         <View style={StyleSheet.section}>
           <Text style={StyleSheet.sectionHeading}>Gender</Text>
-          <RadioForm
-            style={StyleSheet.radio}
-            buttonSize={10}
-            radio_props={genders}
-            initial={0}
-            onPress={(value) => { setIsMale(value) }}
-          />
+          <View>
+            <CustomRadioButtons
+              radioValue={radioValue}
+              setRadioValue={setRadioValue}
+              setValue={setIsMale}
+            />
+          </View>
         </View>
         <View style={StyleSheet.resultSection}>
         <Text style={[{ color: result > 0.4 ? '#f00' : result > 0.3 ? '#ff0' : '#0f0'}, StyleSheet.result]}>{result.toFixed(2)}</Text>
