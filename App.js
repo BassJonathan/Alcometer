@@ -101,7 +101,7 @@ export default function App() {
 
   return (
     <SafeAreaView>
-      <ScrollView overScrollMode>
+      <ScrollView overScrollMode style={StyleSheet.scrollV}>
         <View style={StyleSheet.header}>
           <Text style={StyleSheet.heading}>Alcometer</Text>
         </View>

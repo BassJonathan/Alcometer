@@ -6,6 +6,9 @@ export default StyleSheet.create({
         backgroundColor: '#fff',
         position: "absolute"
     },
+    scrollV: {
+        height: "100%",
+    },
     header: {
         flex: 1,
         alignItems: "center",
