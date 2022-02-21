@@ -79,17 +79,17 @@ export default function App() {
       var grams = litres * 8 * 4.5;
       var burning = weight / 10;
       var gLeft = grams - burning * hoursValue; */
-      var gLeft2 = (((bottlesValue * 0.33) * 8 * 4.5) - (weight / 10) * hoursValue)
+      var gLeft = (((bottlesValue * 0.33) * 8 * 4.5) - (weight / 10) * hoursValue)
 
       if (isMale) {
-        var result = gLeft2 / (weight * 0.7)
+        var result = gLeft / (weight * 0.7)
         if (result < 0) {
           setResult(0)
         } else {
           setResult(result)
         }
       } else {
-        var result = gLeft2 / (weight * 0.6)
+        var result = gLeft / (weight * 0.6)
         if (result < 0) {
           setResult(0)
         } else {
@@ -158,7 +158,7 @@ export default function App() {
           </View>
         </View>
         <View style={StyleSheet.resultSection}>
-        <Text style={[{ color: result > 0.4 ? '#f00' : result > 0.3 ? '#ff0' : '#0f0'}, StyleSheet.result]}>{result.toFixed(2)}</Text>
+        <Text style={[{ color: result > 0.5 ? '#f00' : result > 0.3 ? '#f90' : '#0f0'}, StyleSheet.result]}>{result.toFixed(2)}</Text>
         </View>
         <View style={StyleSheet.footer}>
           <TouchableOpacity
